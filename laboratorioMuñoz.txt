@@ -1,0 +1,197 @@
+
+------------------------------------------CREACION DE LA BASE DE DATOS Y LAS TABLAS----------------------------------------------
+
+CREATE DATABASE laboratorioSQL COLLATE 'utf8_general_ci';
+
+CREATE TABLE PROFESOR (DOC_PROF VARCHAR(11) PRIMARY KEY NOT NULL, NOM_PROF VARCHAR(30), APE_PROF VARCHAR (30), CATE_PROF INT, SAL_PROF INT);
+
+CREATE TABLE CURSO (COD_CURS INT PRIMARY KEY AUTO_INCREMENT, NOM_CURS VARCHAR(100), HORAS_CUR INT, VALOR_CUR INT);
+
+CREATE TABLE ESTUDIANTE (DOC_EST int(11) PRIMARY KEY , NOM_EST VARCHAR(30), APE_EST VARCHAR (30), EDAD_EST INT);
+
+CREATE TABLE ESTUDIANTEXCURSO (cod_cur_estcur INT(11), doc_est_estcur int(11), fec_ini_estcur DATE);
+
+CREATE TABLE CLIENTE (ID_CLI VARCHAR(11) PRIMARY KEY, NOM_CLI VARCHAR(30), APE_CLI VARCHAR(30), DIR_CLI VARCHAR(100), DEP_CLI VARCHAR (20), MES_CUM_CLI VARCHAR(10));
+
+CREATE TABLE ARTICULO (ID_ART INT PRIMARY KEY AUTO_INCREMENT, TIT_ART VARCHAR(100), AUT_ART VARCHAR(100), EDI_ART VARCHAR(300), PREC_ART INT);
+
+CREATE TABLE PEDIDO (ID_PED INT PRIMARY KEY AUTO_INCREMENT, ID_CLI_PED VARCHAR(11), FEC_PED DATE, VAL_PED INT);
+
+CREATE TABLE ARTICULOXPEDIDO (ID_PED_ARTPED INT, ID_ART_ARTPED INT, CAN_ART_ARTPED INT, VAL_VEN_ART_ARTPED INT);
+
+CREATE TABLE COMPAÑIA (COMNIT VARCHAR(11) PRIMARY KEY, COMNOMBRE VARCHAR(30), COMAÑOFUN INT, COMREPLEGAL VARCHAR (100));
+
+CREATE TABLE TIPOSAUTOMOTORES (AUTTIPO INT PRIMARY KEY, AUTNOMBRE VARCHAR(30));
+
+CREATE TABLE AUTOMOTORES (AUTOPLACA VARCHAR(6) PRIMARY KEY, AUTOMARCA VARCHAR(30), AUTOTIPO INT, AUTOMODELO INT, AUTOPASAJEROS INT, AUTOCILINDRAJE INT, AUTONUMCHASIS VARCHAR(20));
+
+CREATE TABLE ASEGURAMIENTOS (ASECODIGO INT(6) PRIMARY KEY AUTO_INCREMENT, ASEFECHAINICIO DATE, ASEFECHAEXPIRACION DATE, ASEVALORASEGURADO INT, ASEESTADO VARCHAR (30), ASECOSTO INT, ASEPLACA VARCHAR (6));
+
+CREATE TABLE INCIDENTES (INCICODIGO INT PRIMARY KEY AUTO_INCREMENT, INCIFECHA DATE, INCIPLACA VARCHAR(6), INCILUGAR VARCHAR (40), INCIANTHERIDOS INT, INCICANFATALIDADES INT, INCICANAUTOSINVOLUCRADOS INT);
+
+
+
+--------------------------------------INSERTANDO LOS VALORES--------------------------------------------------------
+
+
+
+
+INSERT INTO PROFESOR VALUES (63502720, 'Martha', 'Rojas', 2, 690000), (91216904, 'Carlos', 'Pérez', 3, 950000), (13826789, 'Maritza', 'Angarita', 1, 550000), (1098765789, 'Alejandra', 'Torres', 4, 1100000);
+
+INSERT INTO CURSO VALUES (149842, 'Fundamentos de bases de datos', 40, 500000), (250067, 'Fundamentos de SQL', 20, 700000), (289011 , 'Manejo de Mysql', 45, 550000), (345671 , 'Fundamentals of Oracle', 60, 3000000);
+
+INSERT INTO ESTUDIANTE VALUES (63502720, 'María', 'Pérez', 2), (91245678, 'Carlos José', 'López', 3), (1098098097, 'Jonatan', 'Ardila', 1), (1098765679, 'Carlos', 'Martínez', 4);
+
+INSERT INTO ESTUDIANTEXCURSO VALUES (289011, 63502720, '2011-02-01'), (250067, 91245678, '2011-03-01'), (289011, 1098098097, '2011-02-01'), (345671, 1098765679, '2011-04-01');INSERT INTO CLIENTE VALUES (63502718, 'Maritza', 'Rojas', 'Calle 34 No. 14-45', 'Santander', 'Abril'), (13890234, 'Roger', 'Ariza', 'Cra 30 No. 13-45', 'Antioquia', 'Junio'), (77191956, 'Juan Carlos', 'Arenas', 'Diagonal 23 No. 12-34 apto 101', 'Valle', 'Marzo'), (1098765789, 'Catalina', 'Zapata', 'Av. El Libertador No. 30-14', 'Cauca', 'Marzo');
+
+INSERT INTO ARTICULO VALUES (1, 'Redes cisco', 'Ernesto Arigasello', 'Alfaomega -Rama', 60000), (2, 'Facebook y Twitter para adultos', 'Veloso Claudio', 'Alfaomega', 52000), (3, 'Creación de un portal con php y mysql', 'Jacob Pavón Puertas', 'Alfaomega - Rama', 40000), (4, 'Administración de sistemas operativos', 'Julio Gómez López', 'Alfaomega - Rama', 55000);
+
+INSERT INTO PEDIDO VALUES (1, 63502718, '2012-02-25', 120000), (2, 77191956, '2012-04-30', 55000), (3, 63502718, '2011-12-10', 260000), (4 , 1098765789, '2012-02-25', 1800000);
+
+INSERT INTO ARTICULOXPEDIDO VALUES (1, 3, 5, 40000), (1, 4, 12, 55000), (2, 1, 5, 65000), (3 , 2, 10, 55000), (3 , 3, 12, 45000), (4 , 1, 20, 65000);
+
+INSERT INTO COMPAÑIA VALUES (8008908902, 'Seguros Atlantida', 1998, 'Carlos López'), (8999999991, 'Aseguradora Rojas', 1991, 'Luis Fernando Rojas'), (8999999995, 'Seguros del Estado', 2001, 'María Margarita');
+
+INSERT INTO TIPOSAUTOMOTORES VALUES (1, 'Automóviles'), (2, 'Camperos'), (3, 'Camiones');
+
+INSERT INTO AUTOMOTORES VALUES ('FLL420','chevrolet corsa',1,2003,5,1400,'wywzzz167 kk009d25'),('DKZ820','renault stepway',1,2008,5,1600,'wywwzz157kk009d45'),('KJQ920','kia sportage',2,2009,7,2000,'wywzzz157kk009d25');
+
+INSERT INTO ASEGURAMIENTOS VALUES (1,'2012-09-30','2013-09-30',30000000,'Vigente',500000,'FLL420'),(2,'2012-09-27','2013-09-27',35000000,'Vigente',600000,'DKZ820'),(3,'2011-09-28','2011-09-28',50000000,'Vigente',80000,'KJQ920');
+
+INSERT INTO `incidentes`(`INCIFECHA`, `INCIPLACA`, `INCILUGAR`, `INCIANTHERIDOS`, `INCICANFATALIDADES`, `INCICANAUTOSINVOLUCRADOS`) VALUES ('2012-09-30','DKZ820','Bucaramanga',0 ,0 ,2), ('2012-09-27','FLL420','Guiron',1 ,0 ,1), ('2011-09-28','FLL420','Bucaramanga',1 , 0, 2);;
+
+
+------------------------AÑADIENDO LAS FOREING KEY ------------------------------------------
+
+ALTER TABLE ESTUDIANTEXCURSO ADD FOREIGN KEY (cod_cur_estcur) REFERENCES CURSO (COD_CURS);
+
+ALTER TABLE ESTUDIANTEXCURSO ADD FOREIGN KEY (doc_est_estcur) REFERENCES ESTUDIANTE (DOC_EST);
+
+ALTER TABLE PEDIDO ADD FOREIGN KEY (ID_CLI_PED) REFERENCES CLIENTE (ID_CLI);
+
+ALTER TABLE ARTICULOXPEDIDO ADD (FOREIGN KEY (ID_PED_ARTPED) REFERENCES PEDIDO (ID_PED));
+
+ALTER TABLE ARTICULOXPEDIDO ADD FOREIGN KEY (ID_ART_ARTPED) REFERENCES ARTICULO (ID_ART);
+
+ALTER TABLE AUTOMOTORES ADD FOREIGN KEY (AUTOTIPO) REFERENCES TIPOSAUTOMOTORES (AUTTIPO);
+
+ALTER TABLE ASEGURAMIENTOS ADD FOREIGN KEY (ASEPLACA) REFERENCES AUTOMOTORES (AUTOPLACA);
+
+ALTER TABLE INCIDENTES ADD FOREIGN KEY (INCIPLACA) REFERENCES AUTOMOTORES (AUTOPLACA);
+
+
+----------------------------CONSULTAS----------------------------------------------------
+
+1  : Mostrar los salarios de los profesores ordenados por categoría.
+Select SAL_PROF from profesor order by cate_prof;
+
+2  : Mostrar los cursos cuyo valor sea mayor a $500.000.
+Select * from curso where valor_cur > 500000;
+
+3  : Contar el número de estudiantes cuya edad sea mayor a 22.
+Select count(edad_est) from estudiante where edad_est > 22;
+
+4  : Mostrar el nombre y la edad del estudiante más joven.
+Select NOM_EST, min(edad_est) from estudiante;
+
+5  : Calcule el valor promedio de los cursos cuyas horas sean mayores a 40.
+Select avg(valor_cur) from curso where horas_cur>40;
+
+6  :  Obtener el sueldo promedio de los profesores de la categoría 1.
+Select avg(sal_prof) from profesor where cate_prof =1;
+
+7  :  Mostrar todos los campos de la tabla curso en orden ascendente según el valor.
+Select * from curso order by valor_cur;
+
+8  :  Mostrar el nombre del profesor con menor sueldo.
+Select nom_prof from profesor where sal_prof in(Select min(sal_prof) from profesor);
+
+9  :  Visualizar los profesores cuyo sueldo este entre $500.000 y $700.000.
+Select * from profesor where sal_prof > 500000 and sal_prof < 700000;
+
+10 :  Listar todos los pedidos realizados incluyendo el nombre del artículo.
+Select id_ped, id_cli_ped, fec_ped, tit_art From pedido, articuloxpedido, articulo Where id_art_artped= id_art;
+
+11  :  Visualizar los clientes que cumplen años en marzo.
+Select nom_cli from cliente where mes_cum_cli = 'Marzo';
+
+12  : Visualizar los datos del pedido 1, incluyendo el nombre del cliente, la dirección del
+mismo, el nombre y el valor de los artículos que tiene dicho pedido. 
+Select id_ped, val_ped, dir_cli, nom_cli from pedido, cliente where id_cli= id_cli_ped and id_ped=1;
+
+13  : Visualizar el nombre del cliente, la fecha y el valor del pedido más costoso.
+Select nom_cli, fec_ped, val_ped from cliente,pedido Where id_cli= id_cli_ped and val_ped in(Select max(val_ped) from pedido);
+
+14  : Mostrar cuantos artículos se tienen de cada editorial.
+Select * from articulo order by aut_art;
+
+15  : Mostrar los pedidos con los respectivos artículos(código, nombre, valor y cantidad
+pedida).
+Select id_ped, tit_art, val_ped, can_art_artped from articulo, pedido, articuloxpedido Where id_art = id_art_artped and id_ped = id_ped_artped;
+
+16  : Visualizar todos los clientes organizados por apellido.
+Select nom_cli, ape_cli from cliente order by ape_cli;
+
+17  : Visualizar todos los artículos organizados por autor.
+Select * from articulo order by aut_art;
+
+18  : Visualizar los pedidos que se han realizado para el articulo con id 2, el listado debe
+mostrar el nombre y dirección del cliente, el respectivo número de pedido y la cantidad
+solicitada.
+Select nom_cli, dir_cli, id_ped, can_art_artped From cliente,pedido,articuloxpedido Where id_ped_artped= id_ped and id_cli_ped= id_cli and id_art_artped = 2;
+
+19 : Visualizar los datos de las empresas fundadas entre el año 1991 y 1998.
+Select * from compañia where comañofun >= 1991 and comañofun <= 1998;
+
+20  : Listar todos datos de los automotores cuya póliza expira en octubre de 2013, este
+reporte debe visualizar la placa, el modelo, la marca, número de pasajeros, cilindraje
+nombre de automotor, el valor de la póliza y el valor asegurado.
+Select autoplaca, automodelo, automarca, autopasajeros, autocilindraje, autnombre, asecosto, asevalorasegurado From automotores,aseguramientos,tiposautomotores Where autoplaca = aseplaca and auttipo = auttipo
+And asefechaexpiracion <= 20130831 and asefechaexpiracion >= 20130801;
+
+21  : Visualizar los datos de los incidentes ocurridos el 30 de septiembre de 2012, con su
+respectivo número de póliza, fecha de inicio de la póliza, valor asegurado y valor de
+la póliza.
+Select inciplaca, incifecha, incilugar, incicodigo, asefechainicio, asecosto, aseestado,
+asevalorasegurado From aseguramientos,incidentes Where inciplaca = aseplaca and incifecha = 20120930;
+
+22  :Visualizar los datos de los incidentes que han tenido un (1) herido, este reporte debe
+visualizar la placa del automotor, con los respectivos datos de la póliza como son
+fecha de inicio, valor, estado y valor asegurado.
+Select inciantheridos, autoplaca, incilugar, incifecha, asefechainicio, aseestado, asecosto, asevalorasegurado From incidentes, aseguramientos, automotores Where inciplaca = aseplaca and autoplaca = inciplaca and inciantheridos = 1;
+
+23  : Visualizar todos los datos de la póliza más costosa.
+Select * from aseguramientos Where asecosto in(Select max(asecosto) from aseguramientos);
+
+24  : Visualizar los incidentes con el mínimo número de autos involucrados, de este incidente visualizar el estado de la poliza y el valor asegurado.
+Select *, max(asecosto) from aseguramientos;
+
+25  : Visualizar el estado de la póliza y el valor asegurado.
+SELECT asevalorasegurado, aseestado FROM `aseguramientos`;
+
+26  : Visualizar los incidentes del vehículo con placas "FLL420", este reporte debe visualizar
+la fecha, el lugar, la cantidad de heridos del incidente, la fecha de inicio la de expiración
+de la póliza y el valor asegurado.
+Select inciplaca, incifecha, incilugar, inciantheridos, asefechainicio, asefechaexpiracion, asevalorasegurado From incidentes, aseguramientos Where inciplaca = aseplaca and inciplaca = 'FLL420';
+
+27  : Visualizar los datos de la empresa con nit 8999999995.
+Select * from compañia where comnit = '8999999995';
+
+28  :Visualizar los datos de la póliza cuyo valor asegurado es el más costoso, este reporte
+además de visualizar todos los datos de la póliza, debe presentar todos los datos del
+vehículo que tiene dicha póliza.
+Select * from aseguramientos,automotores Where aseplaca = autoplaca and asevalorasegurado in(Select max(asevalorasegurado) from aseguramientos);
+
+29  : Visualizar los datos de las pólizas de los automotores tipo 1, este reporte debe incluir
+placa, marca, modelo, cilindraje del vehículo junto con la fecha de inicio, de finalización
+y estado de la póliza.
+Select autoplaca, automarca, automodelo, autocilindraje, asefechainicio, asefechaexpiracion, aseestado From automotores,aseguramientos Where autoplaca = aseplaca and autotipo =1;
+
+
+  
+
+
+
+
+
+
